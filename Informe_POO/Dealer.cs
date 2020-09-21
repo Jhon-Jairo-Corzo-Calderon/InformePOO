@@ -58,6 +58,34 @@ namespace Informe_POO
                 return deckInp;
 
             }
+
+        }
+
+        public string Deal()
+        {
+            int lastCard = deck.Count - 1;
+            string card = deck[lastCard];
+            deck.Remove(card);
+
+            return card;
+        }
+
+        private List<string> AddCard(string card)
+        {
+            dealerHand.Add(card);
+
+            return dealerHand;
+        }
+
+        public List<string> Init()
+        {
+            string card1 = Deal();
+            string card2 = Deal();
+
+            AddCard(card1);
+            AddCard(card2);
+
+            return dealerHand;
         }
 
     }
