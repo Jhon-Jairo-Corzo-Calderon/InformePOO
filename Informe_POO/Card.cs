@@ -39,6 +39,11 @@ namespace Informe_POO
         public string GetColor()
         { return color; }
 
+        public Card() //Constructor utilizado unicamente para generar el mazo.
+        {
+
+        }
+
         //Metodo Constructor, cuyos parametros son un simbolo y una figura "suit".
         public Card(string symbol, string suit)
         {
