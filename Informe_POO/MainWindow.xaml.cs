@@ -24,5 +24,10 @@ namespace Informe_POO
         {
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            mainFrame.NavigationService.Navigate(new Login());
+        }
     }
 }

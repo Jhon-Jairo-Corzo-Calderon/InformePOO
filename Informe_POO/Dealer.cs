@@ -70,7 +70,7 @@ namespace Informe_POO
             return card;
         }
 
-        private List<string> AddCard(string card)
+        public List<string> AddCard(string card)
         {
             dealerHand.Add(card);
 
