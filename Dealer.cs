@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 
 
-namespace Informe_POO
+namespace InformePOO
 {
     class Dealer
     {

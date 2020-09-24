@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Informe_POO
+namespace InformePOO
 {
     /// <summary>
     /// Lógica de interacción para Login.xaml

@@ -1,7 +1,7 @@
-﻿<Application x:Class="Informe_POO.App"
+﻿<Application x:Class="InformePOO.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Informe_POO"
+             xmlns:local="clr-namespace:InformePOO"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
