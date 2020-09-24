@@ -7,9 +7,13 @@ namespace Informe_POO
 {
     class Dealer
     {
-        private List<string> deck = new List<string>();
+        private static List<string> deck = new List<string>();
 
-        private List<string> dealerHand = new List<string>();
+        public static List<string> Deck { get => deck; set => deck = value; }
+
+        private static List<string> dealerHand = new List<string>();
+
+        public static List<string> DealerHand { get => dealerHand; set => dealerHand = value; }
 
         public List<string> Generate()
         {
@@ -70,7 +74,7 @@ namespace Informe_POO
             return card;
         }
 
-        private List<string> AddCard(string card)
+        public List<string> AddCard(string card)
         {
             dealerHand.Add(card);
 
