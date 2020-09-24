@@ -27,32 +27,49 @@ namespace Informe_POO
         Card card = new Card();
         Dealer dealer = new Dealer();
         Player player = new Player();
+        int playerScore = 0;
+        int dealerScore = 0;
         public Game()
         {
             InitializeComponent();
         }
-
+        private static int Check(List<string> cards)
+        {
+            int acumulado = 0;
+            for (int i = 0; i < cards.Count; i++)
+            {
+                string symbol = Char.ToString(cards[i][0]);
+                string suit = Char.ToString(cards[i][1]);
+                Card card1 = new Card(symbol, suit);
+                acumulado += card1.GetScore()[0];
+            }
+            return acumulado;
+        }
+        static int cont = 0;
         private void btnRequest_Click(object sender, RoutedEventArgs e)
         {
-            if (cont != -1)
+            string playerName = Player.name;
+            if (contPlayer != -1)
             {
-                string playerName = Player.name;
                 List<string> deck = dealer.Generate();
                 List<string> deckInp = dealer.Randomize(deck);
-                List<string> dealerDeck = dealer.Init();
-                if (cont == 0)
+                Dealer.Deck = deckInp;
+                Dealer.DealerHand = dealer.Init();
+                if (contPlayer == 0)
                 {
-                    List<string> playerDeck = player.Init(deckInp);
+                    playerDeck = player.Init(deckInp);
                     player.PlayerHand = playerDeck;
-                    string symbol = Char.ToString(playerDeck[0][0]);
-                    string suit = Char.ToString(playerDeck[0][1]);
-                    Card card1 = new Card(symbol, suit);
-                    symbol = Char.ToString(playerDeck[1][0]);
-                    suit = Char.ToString(playerDeck[1][1]);
-                    Card card2 = new Card(symbol, suit);
-                    int acumulado = card1.GetScore()[0] + card2.GetScore()[0];
-                    txtOutPut.Text += $"{playerName}, tus cartas son: {playerDeck[0]} {playerDeck[1]} \nTu acumulado es: {acumulado}";
+                    playerScore = Game.Check(playerDeck);
+                    txtOutPut.Text += $"{playerName}, tus cartas son: {playerDeck[0]} {playerDeck[1]} \nTu acumulado es: {playerScore} \n\nLa primera carta del tallador es: {Dealer.DealerHand[0]}";
+                    if (playerScore == 21)
+                    {
+                        MessageBox.Show("Haz ganado automáticamente, haz obtenido 21. Felicitaciones!");
+                        txtOutPut.Text = ($"{playerName}, haz ganado. Felicitaciones!");
+                        contPlayer = -1;
+                        contDealer = -1;
+                    }
                     cont++;
+                    contPlayer++;
                 }
                 else
                 {
@@ -63,47 +80,124 @@ namespace Informe_POO
                     {
                         txtOutPut.Text += element + " ";
                     }
-                    int acumulado = 0;
-                    for (int i = 0; i < playerDeck.Count; i++)
+                    playerScore = Game.Check(playerDeck);
+                    cont++;
+                    txtOutPut.Text += $"\nTu acumulado es: {playerScore}\n\nLa primera carta del tallador es: {Dealer.DealerHand[0]}";
+                    if (playerScore > 21)
                     {
-                        string symbol = Char.ToString(playerDeck[i][0]);
-                        string suit = Char.ToString(playerDeck[i][1]);
-                        Card card1 = new Card(symbol, suit);
-                        acumulado += card1.GetScore()[0];
+                        MessageBox.Show("Haz perdido, tu acumulado ha sido mayor a 21. Suerte en una próxima oportunidad. Ahora es turno del tallador");
+                        contPlayer = -1;
+                        contDealer = 0;
                     }
-                    txtOutPut.Text += $"\nTu acumulado es: {acumulado}";
-                    if (acumulado > 21)
+                    else if (playerScore == 21)
                     {
-                        MessageBox.Show("Haz perdido, tu acumulado ha sido mayor a 21. Suerte en una próxima oportunidad");
-                        cont = -1;
+                        MessageBox.Show("Haz obtenido 21. Felicitaciones! Ahora es turno del tallador");
+                        contPlayer = -1;
+                        contDealer = 0;
                     }
-                    else if (acumulado == 21)
+                    else if (playerScore == 21 && cont==2)
                     {
-                        MessageBox.Show("Haz obtenido 21. Felicitaciones!");
-                        cont = -1;
+                        MessageBox.Show("Haz ganado automáticamente, haz obtenido 21. Felicitaciones!");
+                        txtOutPut.Text = ($"{playerName}, haz ganado. Felicitaciones!");
+                        contPlayer = -1;
+                        contDealer = -1;
                     }
                 }
             }
-            else
+            else if (contDealer!=-1)
             {
-                MessageBox.Show("Tu juego ya ha terminado, es hora del tallador");
+                if (contDealer == 0) 
+                {
+                    dealerScore = Game.Check(Dealer.DealerHand);
+                    txtOutPut.Text = $"Tallador, tus cartas son: {Dealer.DealerHand[0]} {Dealer.DealerHand[1]} \nEl acumulado del tallador es: {dealerScore}";
+                    contDealer++;
+                }
+                else
+                {
+                    txtOutPut.Text = $"Tallador, tus cartas son: ";
+                    Dealer.DealerHand.Add(dealer.Deal());
+                    foreach (string element in Dealer.DealerHand)
+                    {
+                        txtOutPut.Text += element + " ";
+                    }
+                    dealerScore = Game.Check(Dealer.DealerHand);
+                    txtOutPut.Text += $"\nEl acumulado del tallador es: {dealerScore}";
+                    if (dealerScore > 21)
+                    {
+                        MessageBox.Show("El acumulado del tallador ha sido mayor a 21. Acontinuación determinaremos quien fue el ganador del juego");
+                        if (playerScore>21)
+                        {
+                            txtOutPut.Text = $"Tanto el tallador como tú han obtenido más de 21, por lo que ninguno tuvo la fortuna de ganar. Suerte en un próxima juego";
+                            contDealer = -1;
+                        }
+                        else
+                        {
+                            txtOutPut.Text =($"{playerName}, haz ganado. Felicitaciones!");
+                            contDealer = -1;
+                        }
+                        
+                    }
+                    else if (dealerScore == 21)
+                    {
+                        if (playerScore == 21)
+                        {
+                            txtOutPut.Text = $"Tanto el tallador como tú han obtenido 21, por lo que ninguno tuvo la fortuna de ganar. Suerte en una próxima oportunidad";
+                            contDealer = -1;
+                        }
+                        else
+                        {
+                            txtOutPut.Text = $"{playerName}, el tallador ha ganado este juego. Suerte en una próxima oportunidad";
+                            contDealer = -1;
+                        }
+                    }
+                }
             }
         }
-        private static int cont = 0;
+        private static int contPlayer = 0;
+        private static int contDealer = -1;
 
         private void btnPlant_Click(object sender, RoutedEventArgs e)
         {
-            if (cont != -1)
+            string playerName = Player.name;
+            if (contPlayer != -1 && contDealer==-1)
             {
 
-                if (MessageBox.Show("¿Estas seguro de que quieres plantar? Una vez plantes, el turno será del tallador", "Mensaje", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                if (MessageBox.Show("¿Estas seguro de que quieres plantar? Una vez plantes, el turno será del tallador, por lo que la próxima vez que solicites una carta, estarás solicitando la carta del tallador", "Mensaje", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    cont = -1;
+                    contPlayer = -1;
+                    contDealer = 0;
+                }
+                else
+                {
+                    contPlayer = 0;
+                    contDealer = -1;
+                }
+            }
+            else if (contDealer != -1 && contPlayer==-1)
+            {
+
+                if (MessageBox.Show("¿Estas seguro de que quieres plantar? Una vez plantes, el juego habrá terminado, por lo que a continuación se mostrará quien fue el ganador del juego", "Mensaje", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    if(playerScore>dealerScore && playerScore<=21)
+                    {
+                        txtOutPut.Text = $"{playerName}, haz ganado este juego. Felicitaciones!";
+                        contDealer = -1;
+                    }
+                    else if(dealerScore>playerScore && dealerScore<=21)
+                    {
+                        txtOutPut.Text = $"{playerName}, el tallador ha ganado este juego. Suerte en una próxima oportunidad";
+                        contDealer = -1;
+                    }
+                    else
+                    {
+                        txtOutPut.Text = $"Tanto el tallador como tú han obtenido el mismo acumulado, por lo que ninguno tuvo la fortuna de ganar. Suerte en una próxima oportunidad";
+                        contDealer = -1;
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("Tu juego ya ha terminado, es hora del tallador");
+                MessageBox.Show("El juega ya ha terminado, si quieres jugar de nuevo solo es cuento de que oprima el botón \"Jugar de nuevo\"");
             }
         }
     }

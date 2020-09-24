@@ -6,7 +6,6 @@ namespace Informe_POO
 {
     class Player
     {
-       
         static public string name;
         private List<string> playerHand = new List<string>();
 
