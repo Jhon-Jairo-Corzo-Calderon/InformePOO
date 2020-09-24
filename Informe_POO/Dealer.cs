@@ -7,13 +7,9 @@ namespace Informe_POO
 {
     class Dealer
     {
-        private static List<string> deck = new List<string>();
+        private List<string> deck = new List<string>();
 
-        public static List<string> Deck { get => deck; set => deck = value; }
-
-        private static List<string> dealerHand = new List<string>();
-
-        public static List<string> DealerHand { get => dealerHand; set => dealerHand = value; }
+        private List<string> dealerHand = new List<string>();
 
         public List<string> Generate()
         {
@@ -43,7 +39,7 @@ namespace Informe_POO
         {
             List<string> originalDeck = new List<string>();
 
-            originalDeck = deck.GetRange(0, 52);
+            originalDeck = deck.GetRange(0, 51);
 
             if (deckInp.Count == 0 || deck != deckInp)
                 throw new System.InvalidOperationException("Error, please, generate a deck before, using this method.");
@@ -51,7 +47,7 @@ namespace Informe_POO
             {
                 Random rdm = new Random();
 
-                for (int i = 0; i <= 51; i++)
+                for (int i = 0; i < 51; i++)
                 {
                     string singleCard = originalDeck[i];
                     int rdmNum = rdm.Next(51);
@@ -62,6 +58,7 @@ namespace Informe_POO
                 return deckInp;
 
             }
+
         }
 
         public string Deal()
@@ -73,7 +70,7 @@ namespace Informe_POO
             return card;
         }
 
-        public List<string> AddCard(string card)
+        private List<string> AddCard(string card)
         {
             dealerHand.Add(card);
 

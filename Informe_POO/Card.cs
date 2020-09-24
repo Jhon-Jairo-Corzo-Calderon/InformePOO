@@ -7,13 +7,13 @@ namespace Informe_POO
     class Card
     {
         //Se crean los atributos.
-        public List<string> suit = new List<string>()
+        private List<string> suit = new List<string>()
         {
             "♥","♦","♣","♠"
         };
 
 
-        public List<string> symbol = new List<string>()
+        private List<string> symbol = new List<string>()
         {
             "A","2","3","4","5","6","7","8","9","10","J","Q","K"
         };
@@ -23,7 +23,7 @@ namespace Informe_POO
             1,2,3,4,5,6,7,8,9,10
         };
 
-        public string color; // No le determino valor, porque depende del atributo "suit".
+        private string color; // No le determino valor, porque depende del atributo "suit".
 
 
         //Creacion de Getters, los setter son irrelevantes para este ejercicio.
@@ -61,7 +61,7 @@ namespace Informe_POO
             }
             else //Si el parametro "symbol" no concuerda, se generara un error.
             {
-                throw new System.InvalidOperationException("Error, please type an existing symbol (A,2,3,4,5,6,7,8,9,10,J,Q,K).");
+                throw new System.InvalidOperationException("Error, please type an existing symbol (A,1,2,3,4,5,6,7,8,9,10,J,Q,K).");
             }
 
             // Este if, cumple el mismo proposito que el anterior if, solo que este evalua el parametro "suit".

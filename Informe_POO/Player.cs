@@ -6,12 +6,9 @@ namespace Informe_POO
 {
     class Player
     {
-        static public string name;
         private List<string> playerHand = new List<string>();
 
-        public List<string> PlayerHand { get => playerHand; set => playerHand = value; }
-
-        public List<string> AddCard(string card)
+        private List<string> AddCard(string card)
         {
             playerHand.Add(card);
 

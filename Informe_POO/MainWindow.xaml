@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Informe_POO"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Label Content="Black Jack" HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="188" FontSize="36" FontStyle="Italic" FontWeight="Bold"/>
-        <Frame Name="mainFrame" Content="" Margin="0,55,0,0" NavigationUIVisibility="Hidden"/>
+
     </Grid>
 </Window>
