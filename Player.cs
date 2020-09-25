@@ -7,9 +7,9 @@ namespace InformePOO
     class Player
     {
         static public string name;
-        private List<string> playerHand = new List<string>();
+        private static List<string> playerHand = new List<string>();
 
-        public List<string> PlayerHand { get => playerHand; set => playerHand = value; }
+        public static List<string> PlayerHand { get => playerHand; set => playerHand = value; }
 
         public List<string> AddCard(string card)
         {

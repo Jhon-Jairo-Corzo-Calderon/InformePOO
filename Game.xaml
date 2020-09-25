@@ -19,8 +19,7 @@
         <Button Name="btnRequest" Content="Solicitar" HorizontalAlignment="Left" Margin="201,166,0,0" VerticalAlignment="Top" Height="36" Width="92" Click="btnRequest_Click"/>
         <Button Name="btnPlant" Content="Plantar" HorizontalAlignment="Left" Margin="201,268,0,0" VerticalAlignment="Top" Height="36" Width="92" Click="btnPlant_Click"/>
         <Label Name="lblPlayerCards" Visibility="Hidden" Content="Label" HorizontalAlignment="Left" Height="74" Margin="74,66,0,0" VerticalAlignment="Top" Width="140"/>
-        <Label Content="Label" Visibility="Hidden" HorizontalAlignment="Left" Height="101" Margin="53,240,0,0" VerticalAlignment="Top" Width="74"/>
-        <Label Content="Label" Visibility="Hidden" HorizontalAlignment="Left" Margin="293,140,0,0" VerticalAlignment="Top"/>
+        <Button Name="btnPlayAgain" Visibility="Hidden" Content="Jugar de nuevo" HorizontalAlignment="Left" Margin="201,217,0,0" VerticalAlignment="Top" Height="36" Width="92" FontWeight="Bold" FontStyle="Italic" Click="btnPlayAgain_Click"/>
 
     </Grid>
 </Page>

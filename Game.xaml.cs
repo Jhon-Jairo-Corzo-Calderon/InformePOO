@@ -22,14 +22,18 @@ namespace InformePOO
     /// </summary>
     public partial class Game : Page
     {
-        List<string> deckInp = new List<string>();
-        List<string> dealerDeck = new List<string>();
-        List<string> playerDeck = new List<string>();
-        Card card = new Card();
-        Dealer dealer = new Dealer();
-        Player player = new Player();
-        int playerScore = 0;
-        int dealerScore = 0;
+        private List<string> deckInp = new List<string>();
+        private List<string> dealerDeck = new List<string>();
+        private List<string> playerDeck = new List<string>();
+        private Card card = new Card();
+        private Dealer dealer = new Dealer();
+        private Player player = new Player();
+        private static int playerScore = 0;
+        private static int dealerScore = 0;
+        private static int gameCounter = 0;
+        private static int playerGames = 0;
+        private static int dealerGames = 0;
+        private static int tiedGames = 0;
         public Game()
         {
             InitializeComponent();
@@ -58,7 +62,6 @@ namespace InformePOO
             }
             return acumulado;
         }
-        static int cont = 0;
         private void btnRequest_Click(object sender, RoutedEventArgs e)
         {
             string playerName = Player.name;
@@ -69,17 +72,24 @@ namespace InformePOO
                 if (contPlayer == 0)
                 {
                     playerDeck = player.Init(deckInp);
-                    player.PlayerHand = playerDeck;
+                    Player.PlayerHand = playerDeck;
                     playerScore = Game.Check(playerDeck);
                     Dealer.Deck = deckInp;
                     Dealer.DealerHand = dealer.Init();
-                    txtOutPut.Text += $"{playerName}, tus cartas son: {playerDeck[0]} {playerDeck[1]} \nTu acumulado es: {playerScore} \n\nLa primera carta del tallador es: {Dealer.DealerHand[0]}";
-                    cont++;
+                    txtOutPut.Text = $"{playerName}, tus cartas son: {playerDeck[0]} {playerDeck[1]} \nTu acumulado es: {playerScore} \n\nLa primera carta del tallador es: {Dealer.DealerHand[0]}";
+                    if (playerScore == 21)
+                    {
+                        MessageBox.Show("Haz ganado automáticamente, haz obtenido 21. Felicitaciones!");
+                        txtOutPut.Text += $"\n\n{playerName}, haz ganado. Felicitaciones!";
+                        contPlayer = -1;
+                        playerGames++;
+                        gameCounter++;
+                    }
                     contPlayer++;
                 }
                 else if (contPlayer==1)
                 {
-                    playerDeck = player.PlayerHand;
+                    playerDeck = Player.PlayerHand;
                     txtOutPut.Text = $"{playerName}, tus cartas son: ";
                     playerDeck.Add(dealer.Deal());
                     foreach (string element in playerDeck)
@@ -87,19 +97,12 @@ namespace InformePOO
                         txtOutPut.Text += element + " ";
                     }
                     playerScore = Game.Check(playerDeck);
-                    cont++;
                     txtOutPut.Text += $"\nTu acumulado es: {playerScore}\n\nLa primera carta del tallador es: {Dealer.DealerHand[0]}";
                     if (playerScore > 21)
                     {
                         MessageBox.Show("Haz perdido, tu acumulado ha sido mayor a 21. Suerte en una próxima oportunidad. Ahora es turno del tallador");
                         contPlayer = -1;
                         contDealer = 0;
-                    }
-                    else if (playerScore == 21 && cont == 2)
-                    {
-                        MessageBox.Show("Haz ganado automáticamente, haz obtenido 21. Felicitaciones!");
-                        txtOutPut.Text += $"\n\n{playerName}, haz ganado. Felicitaciones!";
-                        contPlayer = -1;
                     }
                     else if (playerScore == 21)
                     {
@@ -121,6 +124,9 @@ namespace InformePOO
                             {
                                 txtOutPut.Text += $"\n\n{playerName}, el tallador ha ganado este juego. Suerte en una próxima oportunidad";
                                 esMenorIgual = "NO";
+                                contDealer = -1;
+                                dealerGames++;
+                                gameCounter++;
                             }
                             else if (playerScore == 21)
                             {
@@ -136,27 +142,42 @@ namespace InformePOO
                                 {
                                     txtOutPut.Text = $"Tanto el tallador como tú han obtenido el mismo acumulado, por lo que ninguno tuvo la fortuna de ganar. Suerte en una próxima oportunidad";
                                     esMenorIgual = "NO";
+                                    contDealer = -1;
+                                    tiedGames++;
+                                    gameCounter++;
                                 }
                                 else if (playerScore<dealerScore)
                                 {
                                     txtOutPut.Text += ($"\n\n{playerName}, haz ganado. Felicitaciones!");
                                     esMenorIgual = "NO";
+                                    contDealer = -1;
+                                    playerGames++;
+                                    gameCounter++;
                                 }
                             }
                             else if (dealerScore > 21)
                             {
                                 txtOutPut.Text += ($"\n\n{playerName}, haz ganado. Felicitaciones!");
                                 esMenorIgual = "NO";
+                                contDealer = -1;
+                                playerGames++;
+                                gameCounter++;
                             }
                             else if (dealerScore == 21)
                             {
                                 txtOutPut.Text += $"\n\n{playerName}, el tallador ha ganado este juego. Suerte en una próxima oportunidad";
                                 esMenorIgual = "NO";
+                                contDealer = -1;
+                                dealerGames++;
+                                gameCounter++;
                             }
                             else if (dealerScore > playerScore)
                             {
                                 txtOutPut.Text += $"\n\n{playerName}, el tallador ha ganado este juego. Suerte en una próxima oportunidad";
                                 esMenorIgual = "NO";
+                                contDealer = -1;
+                                dealerGames++;
+                                gameCounter++;
                             }
                             else
                             {
@@ -174,7 +195,14 @@ namespace InformePOO
                     else
                     {
                         txtOutPut.Text += $"\n\n{playerName}, el tallador ha ganado este juego. Suerte en una próxima oportunidad";
+                        contDealer = -1;
+                        dealerGames++;
+                        gameCounter++;
                     }
+                }
+                if (contDealer == -1)
+                {
+                    btnPlayAgain.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -183,7 +211,7 @@ namespace InformePOO
             }
         }
         private static int contPlayer = 0;
-        private static int contDealer = -1;
+        private static int contDealer = 1;
 
         private void btnPlant_Click(object sender, RoutedEventArgs e)
         {
@@ -206,6 +234,27 @@ namespace InformePOO
             {
                 MessageBox.Show("El juega ya ha terminado, si quieres jugar de nuevo solo es cueestión de oprimir el botón \"Jugar de nuevo\"");
             }
+        }
+
+        private void btnPlayAgain_Click(object sender, RoutedEventArgs e)
+        {
+            string playerName = Player.name;
+            contPlayer = 0;
+            contDealer = 1;
+            playerScore = 0;
+            dealerScore = 0;
+            deckInp.Clear();
+            dealerDeck.Clear();
+            playerDeck.Clear();
+            Dealer.DealerHand.Clear();
+            Player.PlayerHand.Clear();
+            MessageBox.Show("Haz decidido jugar una nueva partida, a continuación te mostraremos el marcador de las partidas jugadas, después de esto empezará tu turno. Buena suerte!");
+            txtOutPut.Text = $"Total de partidas jugadas: {gameCounter}\nPartidas ganadas por {playerName}: {playerGames}\nPartidas ganadas por el tallador: {dealerGames}\nPartidas empatadas:{tiedGames}";
+            if (playerGames==dealerGames)
+            {
+                txtOutPut.Text += $"\n\nComo ves, hay un empate entre tú y el tallador, te pedimos porfavor que juegues otra partida y desempates el juego";
+            }
+            btnPlayAgain.Visibility = Visibility.Hidden;
         }
     }
 }
