@@ -15,11 +15,12 @@
                 <GradientStop Color="#FF4F9EFD" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TextBlock Name="txtOutPut" HorizontalAlignment="Left" Height="318" Margin="494,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="240" Background="White"/>
-        <Button Name="btnRequest" Content="Solicitar" HorizontalAlignment="Left" Margin="201,166,0,0" VerticalAlignment="Top" Height="36" Width="92" Click="btnRequest_Click"/>
-        <Button Name="btnPlant" Content="Plantar" HorizontalAlignment="Left" Margin="201,268,0,0" VerticalAlignment="Top" Height="36" Width="92" Click="btnPlant_Click"/>
-        <Label Name="lblPlayerCards" Visibility="Hidden" Content="Label" HorizontalAlignment="Left" Height="74" Margin="74,66,0,0" VerticalAlignment="Top" Width="140"/>
-        <Button Name="btnPlayAgain" Visibility="Hidden" Content="Jugar de nuevo" HorizontalAlignment="Left" Margin="201,217,0,0" VerticalAlignment="Top" Height="36" Width="92" FontWeight="Bold" FontStyle="Italic" Click="btnPlayAgain_Click"/>
+        <TextBlock x:Name="txtOutPut" HorizontalAlignment="Left" Height="318" Margin="494,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="240" Background="White"><Run Language="es-co"/></TextBlock>
+        <Button Name="btnRequest" Content="Solicitar" HorizontalAlignment="Left" Margin="90,118,0,0" VerticalAlignment="Top" Height="36" Width="92" Click="btnRequest_Click"/>
+        <Button Name="btnPlant" Content="Plantar" HorizontalAlignment="Left" Margin="308,118,0,0" VerticalAlignment="Top" Height="36" Width="92" Click="btnPlant_Click"/>
+        <Button Name="btnPlayAgain" Visibility="Hidden" Content="Jugar de nuevo" HorizontalAlignment="Left" Margin="199,173,0,0" VerticalAlignment="Top" Height="36" Width="92" FontWeight="Bold" FontStyle="Italic" Click="btnPlayAgain_Click"/>
+        <Button Name="btnStart" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="199,173,0,0" VerticalAlignment="Top" Height="36" Width="92"/>
+        <Button Name="btnMarginRequest" Visibility="Hidden" Content="" HorizontalAlignment="Left" Margin="90,118,0,0" VerticalAlignment="Top" Height="36" Width="92"/>
 
     </Grid>
 </Page>

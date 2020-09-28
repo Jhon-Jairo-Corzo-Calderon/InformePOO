@@ -6,4 +6,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="BlackJack.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BlackJack.png" />
+  </ItemGroup>
+
 </Project>

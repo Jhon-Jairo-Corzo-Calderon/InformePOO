@@ -17,6 +17,6 @@
         </Grid.Background>
         <Label Content="Ingresa tu nombre:" HorizontalAlignment="Left" Height="36" Margin="205,96,0,0" VerticalAlignment="Top" Width="147" FontSize="16" FontWeight="Normal" FontStyle="Italic"/>
         <TextBox Name="txtName" HorizontalAlignment="Left" Height="36" Margin="415,96,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" BorderThickness="1,1,1,1"/>
-        <Button Content="Jugar" HorizontalAlignment="Center" Height="36" Margin="0,225,0,0" VerticalAlignment="Top" Width="104" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="2,2,2,2" Click="Button_Click"/>
+        <Button Content="Jugar" HorizontalAlignment="Center" Height="36" Margin="0,221,0,0" VerticalAlignment="Top" Width="104" FontSize="16" FontWeight="Bold" FontStyle="Italic" BorderThickness="1,1,1,1" Click="Button_Click" Grid.ColumnSpan="1" Grid.RowSpan="1" Padding="0,0,0,0" ScrollViewer.CanContentScroll="True" ClipToBounds="True"/>
     </Grid>
 </Page>

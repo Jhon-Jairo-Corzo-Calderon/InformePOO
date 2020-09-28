@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InformePOO"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="BlackJack" Height="450" Width="800" Loaded="Window_Loaded" Icon="/BlackJack.png">
     <Grid>
         <Label Content="Black Jack" HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="188" FontSize="36" FontStyle="Italic" FontWeight="Bold"/>
         <Frame Name="mainFrame" Content="" Margin="0,55,0,0" NavigationUIVisibility="Hidden"/>

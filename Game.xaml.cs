@@ -37,6 +37,10 @@ namespace InformePOO
         public Game()
         {
             InitializeComponent();
+            btnRequest.Content = "Comenzar";
+            Thickness thickness = btnStart.Margin;
+            btnRequest.Margin = thickness;
+            btnPlant.Visibility = Visibility.Hidden;
         }
         private static int Check(List<string> cards)
         {
@@ -64,6 +68,10 @@ namespace InformePOO
         }
         private void btnRequest_Click(object sender, RoutedEventArgs e)
         {
+            btnPlant.Visibility = Visibility.Visible;
+            btnRequest.Content = "Solicitar";
+            Thickness thickness = btnMarginRequest.Margin;
+            btnRequest.Margin = thickness;
             string playerName = Player.name;
             List<string> deck = dealer.Generate();
             List<string> deckInp = dealer.Randomize(deck);
