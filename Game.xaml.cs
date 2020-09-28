@@ -41,6 +41,7 @@ namespace InformePOO
             Thickness thickness = btnStart.Margin;
             btnRequest.Margin = thickness;
             btnPlant.Visibility = Visibility.Hidden;
+            btnRequest.FontWeight = btnPlayAgain.FontWeight;
         }
         private static int Check(List<string> cards)
         {
@@ -68,6 +69,7 @@ namespace InformePOO
         }
         private void btnRequest_Click(object sender, RoutedEventArgs e)
         {
+            btnRequest.FontWeight = btnPlant.FontWeight;
             btnPlant.Visibility = Visibility.Visible;
             btnRequest.Content = "Solicitar";
             Thickness thickness = btnMarginRequest.Margin;

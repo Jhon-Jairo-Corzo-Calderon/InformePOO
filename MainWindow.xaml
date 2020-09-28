@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="BlackJack" Height="450" Width="800" Loaded="Window_Loaded" Icon="/BlackJack.png">
     <Grid>
-        <Label Content="Black Jack" HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Width="188" FontSize="36" FontStyle="Italic" FontWeight="Bold"/>
-        <Frame Name="mainFrame" Content="" Margin="0,55,0,0" NavigationUIVisibility="Hidden"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="11*"/>
+            <ColumnDefinition Width="149*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Black Jack" HorizontalAlignment="Left" Height="50" VerticalAlignment="Top" Width="188" FontSize="36" FontStyle="Italic" FontWeight="Bold" Grid.Column="1" Margin="251,0,0,0" Foreground="#FF423E3B"/>
+        <Frame Name="mainFrame" Content="" Margin="0,55,0,0" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
