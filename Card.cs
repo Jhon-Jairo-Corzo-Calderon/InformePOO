@@ -7,13 +7,13 @@ namespace InformePOO
     class Card
     {
         //Se crean los atributos.
-        public List<string> suit = new List<string>()
+        private List<string> suit = new List<string>()
         {
             "♥","♦","♣","♠"
         };
 
 
-        public List<string> symbol = new List<string>()
+        private List<string> symbol = new List<string>()
         {
             "A","2","3","4","5","6","7","8","9","10","J","Q","K"
         };
